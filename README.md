@@ -105,7 +105,7 @@ running, install pm2 globally:
 ```
 $ sudo npm install -g pm2
 ```
-## For the ACR122U reader with Debian Trixie or later
+### For the ACR122U reader with Debian Trixie or later
 
 If you are using Debian Trixie & the ACR122U reader it is necessary to run as sudo due to incompatibilities with the ACR122U NFC reader and Debian Trixie:
 
@@ -131,7 +131,7 @@ If you already have the http API running elsewhere, you can direct this program 
 $ sudo pm2 start npm -- start
 ```
 
-## For Debian distribution earlier than Trixie with the ACR122U or if you are using a more modern reader
+### For Debian distribution earlier than Trixie with the ACR122U or if you are using a more modern reader
 For debian distributions earlier than Trixie or if you are not using the ACR122U reader with Trixie, spin-up sonos_nfc and sonos-http-api as follows:
 
 ```
