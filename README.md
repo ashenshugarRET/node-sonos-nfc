@@ -39,7 +39,7 @@ $ sudo apt install libpcsclite1 libpcsclite-dev pcscd
 If you're running a version of Linux, your computer may try to use the nfc kernel module to talk to tyour ACR122U. You don't want it to do this, so make sure the nfc and enabling modules are not loaded. In Ubuntu/Debian/Raspberry Pi OS, blacklist pn533, pn533_usb, nfc modules so that they don't hijack the card reader.
 
 ```
-$ printf '%s\n' 'pn533' 'pn533_usb' 'nfc' | sudo tee /etc/modprobe.d/blacklist-nfc.conf
+$ printf '%s\n' 'blacklist pn533' 'blacklist pn533_usb' 'blacklist nfc' | sudo tee /etc/modprobe.d/blacklist-nfc.conf
 ```
 
 To ensure the NFC reader has the correct permissions on newer versions of Debian (Trixie onwards?) the following files are required
