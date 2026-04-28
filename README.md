@@ -105,7 +105,33 @@ running, install pm2 globally:
 ```
 $ sudo npm install -g pm2
 ```
+### For the ACR122U reader with Debian Trixie or later
 
+If you are using Debian Trixie & the ACR122U reader it is necessary to run as sudo due to incompatibilities with the ACR122U NFC reader and Debian Trixie:
+
+```
+$ sudo pm2 start npm -- run start-all
+```
+
+Then, to configure your system to run the startup, follow the instructions given when you run
+
+```
+$ sudo pm2 startup
+```
+
+e.g.
+
+```
+$ sudo pm2 save
+```
+
+If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (rename it from .example and update to how you would like to use) and instead run just this program via `npm start`, so replace the `pm2 start` command above with
+
+```
+$ sudo pm2 start npm -- start
+```
+
+### For Debian distribution earlier than Trixie with the ACR122U or if you are using a more modern reader
 For debian distributions earlier than Trixie or if you are not using the ACR122U reader with Trixie, spin-up sonos_nfc and sonos-http-api as follows:
 
 ```
@@ -127,25 +153,7 @@ $ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd
 If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (rename it from .example and update to how you would like to use) and instead run just this program via `npm start`, so replace the `pm2 start` command above with
 
 ```
-$ sudo pm2 start npm -- start
-```
-
-If you are using Debian Trixie & the ACR122U reader it is necessary to run as sudo due to incompatibilities with the ACR122U NFC reader and Debian Trixie:
-
-```
-$ sudo pm2 start npm -- run start-all
-```
-
-Then, to configure your system to run the startup, follow the instructions given when you run
-
-```
-$ sudo pm2 startup
-```
-
-e.g.
-
-```
-$ sudo pm2 save
+$ pm2 start npm -- start
 ```
 
 ## Debug
