@@ -42,8 +42,27 @@ If you're running a version of Linux, your computer may try to use the nfc kerne
 $ printf '%s\n' 'pn533' 'pn533_usb' 'nfc' | sudo tee /etc/modprobe.d/blacklist-nfc.conf
 ```
 
-To make sure everything is square, it's probably a good idea to reboot. In Ubuntu/Debian/Raspberry Pi OS:
+To ensure the NFC reader has the correct permissions on newer versions of Debian (Trixie onwards?) the following files are required
+Create  /etc/polkit-1/rules.d/60-pcscd.rules with this content:
+```
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.debian.pcsc-lite.access_pcsc" &&
+        subject.isInGroup("plugdev")) {
+        return polkit.Result.YES;
+    }
+});
+```
+If using the ACR122U reader create /etc/udev/rules.d/99-acr122.rules with this content:
+```
+SUBSYSTEM=="usb", ATTRS{idVendor}=="072f", ATTRS{idProduct}=="2200", GROUP="plugdev", MODE="0660"
+```
 
+Reload udev rules:
+```
+sudo udevadm control --reload-rules
+```
+
+To make sure everything is square, it's probably a good idea to reboot. In Ubuntu/Debian/Raspberry Pi OS:
 ```
 $ sudo reboot
 ```
@@ -54,7 +73,7 @@ Install node and npm, e.g. download or follow the [official instructions](https:
 so that you can run this code. On Ubuntu/Debian/Raspberry Pi OS, I do this:
 
 ```
-$ curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+$ curl -sL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 ```
 
@@ -87,7 +106,7 @@ running, install pm2 globally:
 $ sudo npm install -g pm2
 ```
 
-and spin-up sonos_nfc and sonos-http-api:
+For debian distributions earlier than Trixie or if you are not using the ACR122U reader with Trixie, spin-up sonos_nfc and sonos-http-api as follows:
 
 ```
 $ pm2 start npm -- run start-all
@@ -108,7 +127,25 @@ $ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd
 If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (rename it from .example and update to how you would like to use) and instead run just this program via `npm start`, so replace the `pm2 start` command above with
 
 ```
-$ pm2 start npm -- start
+$ sudo pm2 start npm -- start
+```
+
+If you are using Debian Trixie & the ACR122U reader it is necessary to run as sudo due to incompatibilities with the ACR122U NFC reader and Debian Trixie:
+
+```
+$ sudo pm2 start npm -- run start-all
+```
+
+Then, to configure your system to run the startup, follow the instructions given when you run
+
+```
+$ sudo pm2 startup
+```
+
+e.g.
+
+```
+$ sudo pm2 save
 ```
 
 ## Debug
@@ -117,6 +154,12 @@ You can monitor the process output to see what's going on. If you're using pm2, 
 
 ```
 $ pm2 log
+```
+
+or for Debian Trixie
+
+```
+$ sudo pm2 log
 ```
 
 # Programming cards
