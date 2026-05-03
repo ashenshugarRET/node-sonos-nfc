@@ -105,9 +105,9 @@ running, install pm2 globally:
 ```
 $ sudo npm install -g pm2
 ```
-### For the ACR122U reader with Debian Trixie or later
+### For the ACS readers with Debian Trixie or later
 
-If you are using Debian Trixie & the ACR122U reader it is necessary to run as sudo due to incompatibilities with the ACR122U NFC reader and Debian Trixie:
+If you are using Debian Trixie and an ACS reader (other readers probably also need sudo, but I haven't tested that), it is necessary to run as sudo due to incompatibilities with the ACR122U NFC reader and Debian Trixie:
 
 ```
 $ sudo pm2 start npm -- run start-all
