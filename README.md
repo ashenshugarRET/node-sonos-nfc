@@ -64,7 +64,7 @@ sudo udevadm control --reload-rules
 
 To make sure everything is square, it's probably a good idea to reboot. In Ubuntu/Debian/Raspberry Pi OS:
 ```
-$ sudo reboot
+$ sudo reboot now
 ```
 
 ## Setup Node
@@ -110,7 +110,7 @@ $ sudo npm install -g pm2
 If you are using Debian Trixie and an ACS reader (other readers probably also need sudo, but I haven't tested that), it is necessary to run as sudo due to incompatibilities with the ACR122U NFC reader and Debian Trixie:
 
 ```
-$ sudo pm2 start npm -- run start-all
+$ sudo pm2 start npm -- name sonos-nfc -- run start-all
 ```
 
 Then, to configure your system to run the startup, follow the instructions given when you run
