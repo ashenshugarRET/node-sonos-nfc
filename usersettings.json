@@ -1,7 +1,7 @@
 {
   "sonos_http_api": "http://127.0.0.1:5005",
-  "sonos_room": "Office",
-  "reset_repeat": false,
-  "reset_shuffle": false,
-  "reset_crossfade": false
+  "sonos_room": "Living Room",
+  "reset_repeat": true,
+  "reset_shuffle": true,
+  "reset_crossfade": true
 }
