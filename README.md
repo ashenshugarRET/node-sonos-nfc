@@ -95,7 +95,7 @@ $ npm install
 
 For simplicity, [sonos-http-api](https://github.com/jishi/node-sonos-http-api), needed for this program to work, is included as a dependency, though you don't need to use it if you already have an http api running elsewhere.
 
-If you _DO_ want to use the included Sonos HTTP API, you'll need to configure it. Rename the `usersettings.json.example` to `usersettings.json` and edit it to your liking. You'll need to set the `spotify` and/or `apple` sections to your credentials. You can also set the `http` section to your liking. The defaults should work fine for most people.
+If you _DO_ want to use the included Sonos HTTP API, you'll need to configure it. Rename the `settings.json.example`  in the `node_modules\sonos-http-api` directory to `settings.json` and edit it to your liking. You'll need to set the `spotify` and/or `apple` sections to your credentials if you want to use those services. You can also set the `http` section to your liking. The defaults should work fine for most people. FOr more information refer to the [sonos-http-api](https://github.com/jishi/node-sonos-http-api) repository.
 
 ## Run all the time
 
@@ -125,7 +125,7 @@ e.g.
 $ sudo pm2 save
 ```
 
-If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (rename it from .example and update to how you would like to use) and instead run just this program via `npm start`, so replace the `pm2 start` command above with
+If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (update to how you would like to use) and instead run just this program via `npm start`, so replace the `sudo pm2 start` command above with
 
 ```
 $ sudo pm2 start npm -- start
@@ -150,7 +150,7 @@ e.g.
 $ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u pi --hp /home/pi
 ```
 
-If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (rename it from .example and update to how you would like to use) and instead run just this program via `npm start`, so replace the `pm2 start` command above with
+If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (update to how you would like to use) and instead run just this program via `npm start`, so replace the `pm2 start` command above with
 
 ```
 $ pm2 start npm -- start
