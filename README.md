@@ -110,7 +110,7 @@ $ sudo npm install -g pm2
 If you are using Debian Trixie and an ACS reader (other readers probably also need sudo, but I haven't tested that), it is necessary to run as sudo due to incompatibilities with the ACR122U NFC reader and Debian Trixie:
 
 ```
-$ sudo pm2 start npm -- name sonos-nfc -- run start-all
+$ sudo pm2 start npm --name sonos-nfc -- run start-all
 ```
 
 Then, to configure your system to run the startup, follow the instructions given when you run
@@ -128,14 +128,14 @@ $ sudo pm2 save
 If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (update to how you would like to use) and instead run just this program via `npm start`, so replace the `sudo pm2 start` command above with
 
 ```
-$ sudo pm2 start npm -- name sonos-nfc -- start
+$ sudo pm2 start npm --name sonos-nfc -- start
 ```
 
 ### For Debian distribution earlier than Trixie with the ACR122U or if you are using a more modern reader
 For debian distributions earlier than Trixie or if you are not using the ACR122U reader with Trixie, spin-up sonos_nfc and sonos-http-api as follows:
 
 ```
-$ pm2 start npm -- name sonos-nfc -- run start-all
+$ pm2 start npm --name sonos-nfc -- run start-all
 ```
 
 Then, to configure your system to run the startup, follow the instructions given when you run
@@ -153,7 +153,7 @@ $ sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd
 If you already have the http API running elsewhere, you can direct this program to that server via the `usersettings.json` (update to how you would like to use) and instead run just this program via `npm start`, so replace the `pm2 start` command above with
 
 ```
-$ pm2 start npm -- name sonos-nfc -- start
+$ pm2 start npm --name sonos-nfc -- start
 ```
 
 ## Debug
